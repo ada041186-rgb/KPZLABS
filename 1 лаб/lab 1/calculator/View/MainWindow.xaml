@@ -1,0 +1,16 @@
+﻿<Window x:Class="calculator.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ViewModel="clr-namespace:calculator.ViewModel"
+        xmlns:View="clr-namespace:calculator.View"
+        Title="MainWindow"
+        Width="220" Height="350">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type ViewModel:BottonsViewModel}">
+            <View:Bottons/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid >
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </Grid>
+</Window>

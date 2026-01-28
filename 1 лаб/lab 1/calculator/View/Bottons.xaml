@@ -1,0 +1,50 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:calculator.View"
+             xmlns:vm="clr-namespace:calculator.ViewModel"
+             mc:Ignorable="av"
+             x:Class="calculator.View.Bottons"
+    
+             >
+    <Grid Width="Auto" Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <TextBox  Text="{Binding Calculationarea}" IsReadOnly="True" Height="30" Margin="0,5" Width="159"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+            <Button Content="1 " Command="{Binding OneCommand}" Width="30" Margin="5"/>
+            <Button Content="2" Command="{Binding TwoCommand}" Width="30" Margin="5"/>
+            <Button Content="3" Command="{Binding ThreeCommand}" Width="30" Margin="5"/>
+            <Button Content="➕" Command="{Binding PlusCommand}" Width="30" Margin="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
+            <Button Content="4 " Command="{Binding FourCommand}" Width="30" Margin="5"/>
+            <Button Content="5" Command="{Binding FiveCommand}" Width="30" Margin="5"/>
+            <Button Content="6" Command="{Binding SixCommand}" Width="30" Margin="5"/>
+            <Button Content="➖" Command="{Binding MinusCommand}" Width="30" Margin="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
+            <Button Content="7 " Command="{Binding SevenCommand}" Width="30" Margin="5"/>
+            <Button Content="8" Command="{Binding EightCommand}" Width="30" Margin="5"/>
+            <Button Content="9" Command="{Binding NineCommand}" Width="30" Margin="5"/>
+            <Button Content="✖️" Command="{Binding MultiplicationCommand}" Width="30" Margin="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5">
+            <Button Content="С" Command="{Binding ClearCommand}"  Width="30" Margin="5"/>
+            <Button Content="0" Command="{Binding ZeroCommand}"  Width="30" Margin="5"/>
+            <Button Content="🟰" Command="{Binding EqualsCommand}"  Width="30" Margin="5"/>
+            <Button Content="➗" Command="{Binding DivisionCommand}"  Width="30" Margin="5"/>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
