@@ -14,6 +14,7 @@ High-level modules depend on abstractions, not concrete implementations:
 ButtonsViewModel depends on the ICommand interface, not the concrete RelayCommand class
 All commands (PlusCommand, MinusCommand, etc.) are declared as ICommand, which makes it easy to replace the implementation without changing the ViewModel
 RelayCommand implements the ICommand interface, providing loose coupling between components
+
 [Example of Open/Closed Principle (OCP)](CalculatorApp/CalculatorApp/CalculatorApp/ViewModel/BaseViewModel.cs)
 Classes are open for extension, but closed for modification:
 
