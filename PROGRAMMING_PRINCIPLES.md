@@ -1,4 +1,4 @@
-# Принципи програмування 
+# Programming principles
 [Example of Single Responsibility Principle (SRP)](CalculatorApp/CalculatorApp/CalculatorApp/ViewModel)
 Each class has one clearly defined responsibility:
 
