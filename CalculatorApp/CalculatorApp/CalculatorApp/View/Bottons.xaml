@@ -30,9 +30,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="1" Command="{Binding OneCommand}"/>
-            <Button Grid.Column="1" Content="2" Command="{Binding TwoCommand}"/>
-            <Button Grid.Column="2" Content="3" Command="{Binding ThreeCommand}"/>
+            <Button Grid.Column="0" Content="1" Command="{Binding DigitCommand}" CommandParameter="1"/>
+            <Button Grid.Column="1" Content="2" Command="{Binding DigitCommand}" CommandParameter="2"/>
+            <Button Grid.Column="2" Content="3" Command="{Binding DigitCommand}" CommandParameter="3"/>
             <Button Grid.Column="3" Content="➕" Command="{Binding PlusCommand}"/>
         </Grid>
 
@@ -44,9 +44,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="4" Command="{Binding FourCommand}"/>
-            <Button Grid.Column="1" Content="5" Command="{Binding FiveCommand}"/>
-            <Button Grid.Column="2" Content="6" Command="{Binding SixCommand}"/>
+            <Button Grid.Column="0" Content="4" Command="{Binding DigitCommand}" CommandParameter="4"/>
+            <Button Grid.Column="1" Content="5" Command="{Binding DigitCommand}" CommandParameter="5"/>
+            <Button Grid.Column="2" Content="6" Command="{Binding DigitCommand}" CommandParameter="6"/>
             <Button Grid.Column="3" Content="➖" Command="{Binding MinusCommand}"/>
         </Grid>
 
@@ -58,9 +58,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="7" Command="{Binding SevenCommand}"/>
-            <Button Grid.Column="1" Content="8" Command="{Binding EightCommand}"/>
-            <Button Grid.Column="2" Content="9" Command="{Binding NineCommand}"/>
+            <Button Grid.Column="0" Content="7" Command="{Binding DigitCommand}" CommandParameter="7"/>
+            <Button Grid.Column="1" Content="8" Command="{Binding DigitCommand}" CommandParameter="8"/>
+            <Button Grid.Column="2" Content="9" Command="{Binding DigitCommand}" CommandParameter="9"/>
             <Button Grid.Column="3" Content="✖️" Command="{Binding MultiplicationCommand}"/>
         </Grid>
 
@@ -73,7 +73,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Content="C" Command="{Binding ClearCommand}"/>
-            <Button Grid.Column="1" Content="0" Command="{Binding ZeroCommand}"/>
+            <Button Grid.Column="1" Content="0" Command="{Binding DigitCommand}" CommandParameter="0"/>
             <Button Grid.Column="2" Content="🟰" Command="{Binding EqualsCommand}"/>
             <Button Grid.Column="3" Content="➗" Command="{Binding DivisionCommand}"/>
         </Grid>
