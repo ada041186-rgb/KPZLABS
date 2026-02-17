@@ -30,16 +30,7 @@ namespace calculator.ViewModel
         public ICommand MultiplicationCommand { get; }
         public ICommand DivisionCommand { get; }
         public ICommand EqualsCommand { get; }
-        public ICommand OneCommand { get; }
-        public ICommand TwoCommand { get; }
-        public ICommand ThreeCommand { get; }
-        public ICommand FourCommand { get; }
-        public ICommand FiveCommand { get; }
-        public ICommand SixCommand { get; }
-        public ICommand SevenCommand { get; }
-        public ICommand EightCommand { get; }
-        public ICommand NineCommand { get; }
-        public ICommand ZeroCommand { get; }
+        public ICommand DigitCommand { get; }
         public ICommand ClearCommand { get; }
         public ICommand DelOneCommand { get; }
         public ICommand PointCommand { get; }
@@ -54,16 +45,7 @@ namespace calculator.ViewModel
             DivisionCommand = new RelayCommand(_ => addOperator(Operators.Divide));
             EqualsCommand = new RelayCommand(_ => Calculate());
 
-            OneCommand = new RelayCommand(_ => addNumber(1));
-            TwoCommand = new RelayCommand(_ => addNumber(2));
-            ThreeCommand = new RelayCommand(_ => addNumber(3));
-            FourCommand = new RelayCommand(_ => addNumber(4));
-            FiveCommand = new RelayCommand(_ => addNumber(5));
-            SixCommand = new RelayCommand(_ => addNumber(6));
-            SevenCommand = new RelayCommand(_ => addNumber(7));
-            EightCommand = new RelayCommand(_ => addNumber(8));
-            NineCommand = new RelayCommand(_ => addNumber(9));
-            ZeroCommand = new RelayCommand(_ => addNumber(0));
+            DigitCommand = new RelayCommand(param => addNumber(Convert.ToInt32(param)));
 
             PointCommand = new RelayCommand(_ => { Calculationarea += ","; });
             ClearCommand = new RelayCommand(_ => Reset());
