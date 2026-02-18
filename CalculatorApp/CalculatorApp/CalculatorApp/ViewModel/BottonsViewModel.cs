@@ -1,6 +1,7 @@
 ﻿using calculator.Command;
 using calculator.Enumes;
 using calculator.Model;
+using calculator.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace calculator.ViewModel
 {
     public class BottonsViewModel : BaseViewModel
     {
+        private readonly CalculatorService _calculatorService = new CalculatorService();
+
         private string _calculationarea = "";
         public string Calculationarea
         {
@@ -25,7 +28,6 @@ namespace calculator.ViewModel
         public Dictionary<int, Number> Numbers { get; set; } = new Dictionary<int, Number>();
         public int CurrentIndex { get; set; } = 0;
 
-        
         private bool _isDecimalMode = false;
         private double _decimalMultiplier = 0.1;
 
@@ -48,9 +50,7 @@ namespace calculator.ViewModel
             MultiplicationCommand = new RelayCommand(_ => addOperator(Operators.Multiply));
             DivisionCommand = new RelayCommand(_ => addOperator(Operators.Divide));
             EqualsCommand = new RelayCommand(_ => Calculate());
-
             DigitCommand = new RelayCommand(param => addNumber(Convert.ToInt32(param)));
-
             PointCommand = new RelayCommand(_ => AddDecimalPoint());
             ClearCommand = new RelayCommand(_ => Reset());
             DelOneCommand = new RelayCommand(_ => DeleteLast());
@@ -58,7 +58,6 @@ namespace calculator.ViewModel
             HiCommand = new RelayCommand(_ => MessageBox.Show("Привіт!"));
         }
 
-        
         public void addNumber(int number)
         {
             if (!Numbers.ContainsKey(CurrentIndex))
@@ -78,7 +77,6 @@ namespace calculator.ViewModel
             Calculationarea += number.ToString();
         }
 
-      
         private void AddDecimalPoint()
         {
             if (_isDecimalMode || !Numbers.ContainsKey(CurrentIndex)) return;
@@ -108,7 +106,6 @@ namespace calculator.ViewModel
             CurrentIndex++;
         }
 
-      
         private void DeleteLast()
         {
             if (string.IsNullOrEmpty(Calculationarea)) return;
@@ -131,7 +128,6 @@ namespace calculator.ViewModel
             }
         }
 
-        
         private void HandleDigitDeletion()
         {
             if (!Numbers.ContainsKey(CurrentIndex)) return;
@@ -181,7 +177,6 @@ namespace calculator.ViewModel
                 Numbers.Remove(CurrentIndex + 1);
         }
 
-    
         private string ExtractCurrentSegment()
         {
             int start = Calculationarea.Length;
@@ -202,12 +197,11 @@ namespace calculator.ViewModel
 
         private void Calculate()
         {
-            if (!HasEnoughOperands()) return;
+            if (Numbers.Count < 2) return;
 
             try
             {
-                var items = PrepareOperands();
-                double result = EvaluateExpression(items);
+                double result = _calculatorService.Evaluate(Numbers);
                 ApplyResult(result);
             }
             catch (DivideByZeroException)
@@ -220,72 +214,6 @@ namespace calculator.ViewModel
                 MessageBox.Show($"Помилка в обчисленнях: {ex.Message}");
                 Reset();
             }
-        }
-
-        private bool HasEnoughOperands()
-        {
-            return Numbers.Count >= 2 || Numbers.ContainsKey(CurrentIndex);
-        }
-
-        private List<Number> PrepareOperands()
-        {
-            return Numbers
-                .OrderBy(k => k.Key)
-                .Select(k => new Number
-                {
-                    Value = k.Value.Value,
-                    Operation = k.Value.Operation
-                })
-                .ToList();
-        }
-
-        private double EvaluateExpression(List<Number> items)
-        {
-            ApplyHighPrecedenceOperators(items);
-            return ApplyLowPrecedenceOperators(items);
-        }
-
-        private void ApplyHighPrecedenceOperators(List<Number> items)
-        {
-            for (int i = 0; i < items.Count - 1;)
-            {
-                var op = items[i].Operation;
-
-                if (op == Operators.Multiply || op == Operators.Divide)
-                {
-                    double val1 = items[i].Value;
-                    double val2 = items[i + 1].Value;
-
-                    if (op == Operators.Divide && val2 == 0)
-                        throw new DivideByZeroException();
-
-                    items[i].Value = op == Operators.Multiply ? val1 * val2 : val1 / val2;
-                    items[i].Operation = items[i + 1].Operation;
-                    items.RemoveAt(i + 1);
-                }
-                else
-                {
-                    i++;
-                }
-            }
-        }
-
-        private double ApplyLowPrecedenceOperators(List<Number> items)
-        {
-            double result = items[0].Value;
-
-            for (int i = 0; i < items.Count - 1; i++)
-            {
-                double next = items[i + 1].Value;
-
-                switch (items[i].Operation)
-                {
-                    case Operators.Add: result += next; break;
-                    case Operators.Subtract: result -= next; break;
-                }
-            }
-
-            return result;
         }
 
         private void ApplyResult(double result)
